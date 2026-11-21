@@ -4,31 +4,7 @@ const cors = require("cors");
 require("dotenv").config();
 
 const app = express();
-
-// Allow the production checkout and local development pages to call this API.
-const allowedOrigins = new Set([
-  "https://docs.menzshops.com",
-  "http://localhost:5500",
-  "http://127.0.0.1:5500",
-  ...(process.env.CORS_ORIGINS || "")
-    .split(",")
-    .map((origin) => origin.trim())
-    .filter(Boolean),
-]);
-
-const corsOptions = {
-  origin(origin, callback) {
-    callback(null, !origin || allowedOrigins.has(origin));
-  },
-  methods: ["GET", "POST", "OPTIONS"],
-  allowedHeaders: ["Content-Type"],
-  maxAge: 86400,
-  optionsSuccessStatus: 204,
-};
-
-// Handle the browser's JSON preflight before parsing the POST body.
-app.options("/push", cors(corsOptions));
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(express.json());
 
 const LINE_API_URL = "https://api.line.me/v2/bot/message/push";
