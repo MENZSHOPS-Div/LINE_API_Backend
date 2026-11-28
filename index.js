@@ -7,7 +7,7 @@ const app = express();
 
 // Allow the production checkout and local development pages to call this API.
 const allowedOrigins = new Set([
-  "https://docs.menzshops.com",
+  "https://www.menzshops.com",
   "http://localhost:5500",
   "http://127.0.0.1:5500",
   ...(process.env.CORS_ORIGINS || "")
